@@ -3,9 +3,6 @@ from numpy import e
 from symbols import *
 
 
-
-
-
 def Rj(u, v, w, p):
     s = Symbol('s')
     return 1.5 * integrate(1 / ((p + s) * sqrt((u + s) * (v + s) * (w + s))),
@@ -94,7 +91,7 @@ def get_Omega(mode='L'):
     F1, F2, F3 = get_F(mode)
     return [
         J / I11 * sqrt((B * I33 - I22) * I11 / ((I33 - I11) * I22)) * F1,
-        J / I22 * sqrt((B * I33 - I22) / (I33 - I22)) * F2, 
+        J / I22 * sqrt((B * I33 - I22) / (I33 - I22)) * F2,
         J / I33 * sqrt((I22 - B * I11) * I33 / ((I33 - I11) * I22)) * F3
     ]
 
@@ -105,14 +102,15 @@ def get_gamma():
     gamma3 = G*m/(a**3) * Rj(1, h1**2, h1**2*h2**2, h1**2*h2**2)
     return gamma1, gamma2, gamma3
 
+
 def get_Bmat(Omega1, Omega2, Omega3, gamma1, gamma2, gamma3):
     Bmat = Matrix([
         [Omega2**2+Omega3**2-gamma1, -
             (2*Omega1*Omega2)/(1+h1**2), -(2*Omega1*Omega3)/(1+h1**2*h2**2)],
         [-(2*h1**2*Omega1*Omega2)/(1+h1**2), Omega1**2 +
-        Omega3**2-gamma2, -(2*Omega1*Omega3)/(1+h2**2)],
+         Omega3**2-gamma2, -(2*Omega1*Omega3)/(1+h2**2)],
         [-(2*h1**2*h2**2*Omega1*Omega3)/(1+h1**2*h2**2), -
-        (2*h2**2*Omega1*Omega3)/(1+h2**2), Omega1**2+Omega2**2-gamma3]
+         (2*h2**2*Omega1*Omega3)/(1+h2**2), Omega1**2+Omega2**2-gamma3]
     ])
     return Bmat
 
